@@ -1,0 +1,25 @@
+# .gitignore
+# /mongodb_express_backend/config.js
+/mongodb_express_backend/node_modules/
+
+/reactjs_node_crud/node_modules/
+# dependencies
+/reactjs_node_crud/.pnp
+/reactjs_node_crud/.pnp.js
+
+# testing
+/reactjs_node_crud/coverage
+
+# production
+/reactjs_node_crud/build
+
+# misc
+/reactjs_node_crud/.DS_Store
+/reactjs_node_crud/.env.local
+/reactjs_node_crud/.env.development.local
+/reactjs_node_crud/.env.test.local
+/reactjs_node_crud/.env.production.local
+
+/reactjs_node_crud/npm-debug.log*
+/reactjs_node_crud/yarn-debug.log*
+/reactjs_node_crud/yarn-error.log*
