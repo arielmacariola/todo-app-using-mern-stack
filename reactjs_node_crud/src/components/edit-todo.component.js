@@ -29,6 +29,45 @@ export default class EditTodo extends Component {
             });
     }
 
+    onChangeTodoDescription = (e) => {
+        this.setState({
+            todo_description: e.target.value
+        });
+    }
+
+    onChangeTodoResponsible = (e) => {
+        this.setState({
+            todo_responsible: e.target.value
+        });
+    }
+
+    onChangeTodoPriority = (e) => {
+        this.setState({
+            todo_priority: e.target.value
+        });
+    }
+
+    onChangeTodoCompleted = (e) => {
+        this.setState({
+            todo_completed: !this.state.todo_completed
+        });
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        const obj = {
+            todo_description: this.state.todo_description,
+            todo_responsible: this.state.todo_responsible,
+            todo_priority: this.state.todo_priority,
+            todo_completed: this.state.todo_completed
+        };
+
+        axios.post('http://localhost:4000/todos/update/' + this.props.match.params.id, obj)
+            .then(res => console.log(res.data));
+
+        this.props.history.push('/');
+    }
+
     render() {
         return (
             <div>
@@ -52,7 +91,7 @@ export default class EditTodo extends Component {
                     </div>
                     <div className="form-group">
                         <div className="form-check form-check-inline">
-                            <input type="text"  className="form-check-input"
+                            <input className="form-check-input"
                                                 type="radio"
                                                 name="priorityOptions"
                                                 id="priorityLow"
@@ -60,10 +99,10 @@ export default class EditTodo extends Component {
                                                 checked={this.state.todo_priority==='Low'}
                                                 onChange={this.onChangeTodoPriority}
                                             />
-                            <label htmlFor="" className="form-check-label">Low</label>
+                            <label htmlFor="priorityLow" className="form-check-label">Low</label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input type="text"  className="form-check-input"
+                            <input className="form-check-input"
                                                 type="radio"
                                                 name="priorityOptions"
                                                 id="priorityMedium"
@@ -71,10 +110,10 @@ export default class EditTodo extends Component {
                                                 checked={this.state.todo_priority==='Medium'}
                                                 onChange={this.onChangeTodoPriority}
                                             />
-                            <label htmlFor="" className="form-check-label">Medium</label>
+                            <label htmlFor="priorityMedium" className="form-check-label">Medium</label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input type="text"  className="form-check-input"
+                            <input className="form-check-input"
                                                 type="radio"
                                                 name="priorityOptions"
                                                 id="priorityHigh"
@@ -82,8 +121,10 @@ export default class EditTodo extends Component {
                                                 checked={this.state.todo_priority==='High'}
                                                 onChange={this.onChangeTodoPriority}
                                             />
-                            <label htmlFor="" className="form-check-label">High</label>
+                            <label htmlFor="priorityHigh" className="form-check-label">High</label>
                         </div>
+                    </div>
+
                         <div className="form-check">
                             <input type="checkbox"
                                     className="form-check-input"
@@ -99,7 +140,6 @@ export default class EditTodo extends Component {
                         <div className="form-group">
                             <input type="submit" value="Update Todo" className="btn btn-primary" />
                         </div>
-                    </div>
                 </form>
             </div>
         )
